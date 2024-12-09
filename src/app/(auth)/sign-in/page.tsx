@@ -35,6 +35,7 @@ export default function SignInForm() {
             redirect: false,
             identifier: data.identifier,
             password: data.password,
+            callbackUrl: '/dashboard'
         });
 
         if (result?.error) {
@@ -44,6 +45,7 @@ export default function SignInForm() {
                     description: 'Incorrect username or password',
                     variant: 'destructive',
                 });
+                return;
             } else {
                 toast({
                     title: 'Error',
@@ -53,9 +55,13 @@ export default function SignInForm() {
             }
         }
 
-        if (result?.url) {
-            router.replace('/dashboard');
-        }
+        toast({
+            title: 'Login Successful',
+            description: 'You\'ve been logged in successfully!',
+            variant: 'default',
+        });
+
+        router.push('/dashboard');
     };
 
     return (
