@@ -20,8 +20,8 @@ export async function POST() {
             },
             { status: 200 }
         );
-    } catch (error) {
-        console.error("Error getting suggestions from gemini", error);
+    } catch (error: any) {
+        console.error("Error getting suggestions from gemini:", error.message || error);
         return Response.json(
             {
                 success: false,
