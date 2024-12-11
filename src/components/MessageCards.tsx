@@ -1,5 +1,5 @@
 "use client";
-import { Card, CardContent, CardFooter } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "./ui/button";
 import { Message } from "@/models/User";
 import { useToast } from "@/hooks/use-toast";

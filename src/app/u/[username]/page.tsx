@@ -68,6 +68,7 @@ const Page = ({ params }: PageProps) => {
                     setUserFound(false);
                 }
             } catch (error) {
+                console.log(error)
                 setUserFound(false);
             }
         };

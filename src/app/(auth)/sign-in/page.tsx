@@ -67,7 +67,7 @@ const Page = () => {
                 router.replace(callbackUrl);
                 router.refresh();
             }
-        } catch (_error) {
+        } catch (error) {
             toast({
                 title: "Error",
                 description: "An unexpected error occurred",
