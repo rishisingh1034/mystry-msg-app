@@ -1,10 +1,13 @@
 {
   "extends": [ "next/core-web-vitals", "next/typescript" ],
   "rules": {
-    "react/no-unescaped-entities": "off",
-    "@next/next/no-img-element": "off",
-    "no-console": [ "warn", { "allow": [ "warn", "error" ] } ],
-    "@typescript-eslint/no-unused-vars": "warn",
-    "react/jsx-key": "warn"
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "argsIgnorePattern": "^_",
+        "caughtErrors": "none"
+      }
+    ],
+    "@typescript-eslint/no-explicit-any": "warn"
   }
 }

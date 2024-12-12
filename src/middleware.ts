@@ -3,31 +3,31 @@ import { getToken } from "next-auth/jwt";
 export { default } from "next-auth/middleware";
 
 export const config = {
-    matcher: ["/dashboard/:path*", "/sign-in", "/sign-up", "/", "/verify/:path*"],
+  matcher: ["/dashboard/:path*", "/sign-in", "/sign-up", "/", "/verify/:path*"],
 };
 
 export async function middleware(request: NextRequest) {
-    const token = await getToken({
-        req: request,
-        secret: process.env.NEXT_AUTH_SECRET,
-    });
-    const url = request.nextUrl;
+  const token = await getToken({
+    req: request,
+    secret: process.env.NEXT_AUTH_SECRET,
+  });
+  const url = request.nextUrl;
 
-    const isAuthPage =
-        url.pathname.startsWith("/sign-in") ||
-        url.pathname.startsWith("/sign-up") ||
-        url.pathname.startsWith("/verify") ||
-        url.pathname === "/";
+  const isAuthPage =
+    url.pathname.startsWith("/sign-in") ||
+    url.pathname.startsWith("/sign-up") ||
+    url.pathname.startsWith("/verify") ||
+    url.pathname === "/";
 
-    if (token && isAuthPage) {
-        return NextResponse.redirect(new URL("/dashboard", request.url));
-    }
+  if (token && isAuthPage) {
+    return NextResponse.redirect(new URL("/dashboard", request.url));
+  }
 
-    if (!token && url.pathname.startsWith("/dashboard")) {
-        const signInUrl = new URL("/sign-in", request.url);
-        signInUrl.searchParams.set("callbackUrl", url.pathname);
-        return NextResponse.redirect(signInUrl);
-    }
+  if (!token && url.pathname.startsWith("/dashboard")) {
+    const signInUrl = new URL("/sign-in", request.url);
+    signInUrl.searchParams.set("callbackUrl", url.pathname);
+    return NextResponse.redirect(signInUrl);
+  }
 
-    return NextResponse.next();
+  return NextResponse.next();
 }
